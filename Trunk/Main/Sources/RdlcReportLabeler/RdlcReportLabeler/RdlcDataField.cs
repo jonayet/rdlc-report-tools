@@ -24,6 +24,5 @@ namespace RdlcReportLabeler
     {
         Iif,
         Switch,
-        Lookup
     }
 }

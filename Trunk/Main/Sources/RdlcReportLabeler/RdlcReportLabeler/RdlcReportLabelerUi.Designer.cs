@@ -39,7 +39,7 @@
             // 
             this.doLabelingButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.doLabelingButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.doLabelingButton.Location = new System.Drawing.Point(657, 627);
+            this.doLabelingButton.Location = new System.Drawing.Point(672, 633);
             this.doLabelingButton.Name = "doLabelingButton";
             this.doLabelingButton.Size = new System.Drawing.Size(123, 39);
             this.doLabelingButton.TabIndex = 1;
@@ -52,7 +52,7 @@
             this.rdlcXmlInputScintilla.ConfigurationManager.Language = "xml";
             this.rdlcXmlInputScintilla.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rdlcXmlInputScintilla.Location = new System.Drawing.Point(0, 0);
-            this.rdlcXmlInputScintilla.Margins.Margin0.Width = 40;
+            this.rdlcXmlInputScintilla.Margins.Margin0.Width = 50;
             this.rdlcXmlInputScintilla.Name = "rdlcXmlInputScintilla";
             this.rdlcXmlInputScintilla.Size = new System.Drawing.Size(830, 704);
             this.rdlcXmlInputScintilla.Styles.BraceBad.FontName = "Verdana\0\0\0\0\0\0\0\0\0\0\0\0\0";
@@ -69,7 +69,8 @@
             // 
             // settingsButton
             // 
-            this.settingsButton.Location = new System.Drawing.Point(705, 12);
+            this.settingsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.settingsButton.Location = new System.Drawing.Point(720, 29);
             this.settingsButton.Name = "settingsButton";
             this.settingsButton.Size = new System.Drawing.Size(75, 23);
             this.settingsButton.TabIndex = 3;

@@ -38,7 +38,7 @@
             this.rdlcXmlOutputScintilla.ConfigurationManager.Language = "xml";
             this.rdlcXmlOutputScintilla.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rdlcXmlOutputScintilla.Location = new System.Drawing.Point(0, 0);
-            this.rdlcXmlOutputScintilla.Margins.Margin0.Width = 40;
+            this.rdlcXmlOutputScintilla.Margins.Margin0.Width = 50;
             this.rdlcXmlOutputScintilla.Name = "rdlcXmlOutputScintilla";
             this.rdlcXmlOutputScintilla.Size = new System.Drawing.Size(830, 704);
             this.rdlcXmlOutputScintilla.Styles.BraceBad.FontName = "Verdana\0\0\0\0\0\0\0\0\0\0\0\0\0";

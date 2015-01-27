@@ -1,73 +1,91 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Xml;
+using RdlcReportLabeler.Properties;
 
 namespace RdlcReportLabeler
 {
     public class RdlcLabeler
     {
-        private const string XmlNamespace1 = "http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition";
-        private const string XmlNamespace2 = "http://schemas.microsoft.com/sqlserver/reporting/2010/01/reportdefinition";
-        private const int MaxFieldsToConcate = 3;
-        private readonly int _maxFieldLength = 10;
+        private readonly string[] _xmlNamespaces = {"http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition", "http://schemas.microsoft.com/sqlserver/reporting/2010/01/reportdefinition"};
+        private readonly string[] _nsPrefixes = { "ns1", "ns2" };
+        private readonly int _maxFieldsToConcate = 3;
+        private readonly int _maxFieldLength;
         private string _xmlNamespace = "";
+        private string _xmlPrefix = "";
+
 
         public RdlcLabeler()
         {
-            _maxFieldLength = (int) Properties.Settings.Default.FieldLength;
+            _maxFieldLength = (int) Settings.Default.FieldLength;
+            _maxFieldsToConcate = (int) Settings.Default.MaxFieldsToConcate;
         }
 
         public string GetLabledRdlcReport(XmlDocument xmlDoc)
         {
             // create ns manager
             var xmlnsManager = new XmlNamespaceManager(xmlDoc.NameTable);
-            xmlnsManager.AddNamespace("ns1", XmlNamespace1);
-            xmlnsManager.AddNamespace("ns2", XmlNamespace2);
+            xmlnsManager.AddNamespace(_nsPrefixes[0], _xmlNamespaces[0]);
+            xmlnsManager.AddNamespace(_nsPrefixes[1], _xmlNamespaces[1]);
 
             // pre-check for "TextRun" element
-            if (xmlDoc.DocumentElement == null) { throw new ApplicationException("Empty XML doc!"); }
-            var textRuns = xmlDoc.DocumentElement.SelectNodes("//ns1:TextRun", xmlnsManager);
-            _xmlNamespace = XmlNamespace1;
-            if (textRuns == null || textRuns.Count == 0)
+            if (xmlDoc.DocumentElement == null)
             {
-                textRuns = xmlDoc.DocumentElement.SelectNodes("//ns2:TextRun", xmlnsManager);
-                _xmlNamespace = XmlNamespace2;
-                if (textRuns == null || textRuns.Count == 0)
-                {
-                    throw new ApplicationException("No TextRun elemment found!");
-                }
+                throw new ApplicationException("Empty XML doc!");
             }
 
-            foreach (XmlNode xmlNode in textRuns)
+            XmlNodeList tablixes = null;
+            for (var i = 0; i < _xmlNamespaces.Length; i++)
             {
-                if (xmlNode.HasChildNodes)
+                _xmlPrefix = _nsPrefixes[i];
+                _xmlNamespace = _xmlNamespaces[i];
+                tablixes = xmlDoc.DocumentElement.SelectNodes("//" + _xmlPrefix + ":" + "Tablix", xmlnsManager);
+                if (tablixes != null && tablixes.Count > 0) { break; }
+            }
+            if (tablixes == null || tablixes.Count == 0) { throw new ApplicationException("No Tablix elemment found!"); }
+
+            foreach (XmlNode tablixNode in tablixes)
+            {
+                XmlElement dataSetNameElement = tablixNode["DataSetName"];
+                var tablixDatasetName = "";
+                if (dataSetNameElement != null) { tablixDatasetName = dataSetNameElement.InnerText; }
+
+                var textRuns = tablixNode.SelectNodes("//" + _xmlPrefix + ":" + "TextRun", xmlnsManager);
+                if (textRuns == null) { continue; }
+
+                foreach (XmlNode xmlNode in textRuns)
                 {
-                    XmlElement valueElement = xmlNode["Value"];
-                    if (valueElement != null)
+                    if (xmlNode.HasChildNodes)
                     {
-                        string expression = valueElement.InnerText;
-                        if (!string.IsNullOrEmpty(expression))
+                        XmlElement valueElement = xmlNode["Value"];
+                        if (valueElement != null)
                         {
-                            RdlcExpression aRdlcExpression = new RdlcExpressionParser().GetParsedRdlcExpression(expression);
-                            if (aRdlcExpression.Fields.Count > 0)
+                            string expression = valueElement.InnerText;
+                            if (!string.IsNullOrEmpty(expression))
                             {
-                                var labelElement = xmlNode["Label"];
-                                if (labelElement == null)
+                                RdlcExpression aRdlcExpression = new RdlcExpressionParser().GetParsedRdlcExpression(expression, tablixDatasetName);
+                                if (aRdlcExpression.Fields.Count > 0)
                                 {
-                                    var labelText = BuildLabelText(aRdlcExpression);
-                                    if (!string.IsNullOrWhiteSpace(labelText))
+                                    var labelElement = xmlNode["Label"];
+                                    if (labelElement == null)
                                     {
-                                        labelElement = xmlDoc.CreateElement("Label", _xmlNamespace);
-                                        labelElement.InnerText = labelText;
-                                        xmlNode.InsertBefore(labelElement, valueElement);
+                                        var labelText = BuildLabelText(aRdlcExpression);
+                                        if (!string.IsNullOrWhiteSpace(labelText))
+                                        {
+                                            labelElement = xmlDoc.CreateElement("Label", _xmlNamespace);
+                                            labelElement.InnerText = labelText;
+                                            xmlNode.InsertBefore(labelElement, valueElement);
+                                        }
                                     }
-                                }
-                                else
-                                {
-                                    
+                                    else
+                                    {
+
+                                    }
                                 }
                             }
                         }
@@ -97,20 +115,19 @@ namespace RdlcReportLabeler
                 memoryStream.Dispose();
             }
 
-            
             return xmlString;
         }
 
         string BuildLabelText(RdlcExpression rdlcExpression)
         {
-            bool hasLookup = rdlcExpression.SpacialAttributes.Exists(a => a == SpacialAttribute.Lookup);
             bool hasIif = rdlcExpression.SpacialAttributes.Exists(a => a == SpacialAttribute.Iif);
             bool hasSwitch = rdlcExpression.SpacialAttributes.Exists(a => a == SpacialAttribute.Switch);
             string labelText = "";
-            for (int i = 0; i < rdlcExpression.Fields.Count && i < MaxFieldsToConcate; i++)
+            for (int i = 0; i < rdlcExpression.Fields.Count && i < _maxFieldsToConcate; i++)
             {
                 var fieldText = rdlcExpression.Fields[i].Field;
-                if (fieldText.Length <= 0) { continue; }
+                var datasetName = rdlcExpression.Fields[i].Dataset;
+                if (fieldText.Length == 0) { continue; }
                 if (i != 0 ) { labelText += "_"; }
 
                 // shorten length
@@ -119,10 +136,9 @@ namespace RdlcReportLabeler
                     fieldText = fieldText.Substring(0, _maxFieldLength);
                 }
 
-                if (hasLookup)
+                if (datasetName.Equals("LookupTable"))
                 {
                     labelText += fieldText.Substring(0, 1).ToUpper() + fieldText.Substring(1);
-
                 }
                 else
                 {

@@ -14,7 +14,7 @@ namespace RdlcReportLabeler
         private const string RegexForDatasetOnly = "\"(.*?)\"";
         private const string RegexForFieldWithDataset = @"First\((.*?)\)";
 
-        public RdlcExpression GetParsedRdlcExpression(string rdlcExpressionText)
+        public RdlcExpression GetParsedRdlcExpression(string rdlcExpressionText, string tablixDatasetName)
         {
             var rdlcExpression = new RdlcExpression();
             var regex = new Regex(RegexForFieldOnly + "|" + RegexForFieldWithDataset, RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace);
@@ -30,12 +30,12 @@ namespace RdlcReportLabeler
 
             rdlcExpression.ExpressionText = rdlcExpressionText;
             rdlcExpression.FieldStrings = fieldDataStrings;
-            rdlcExpression.Fields = MakeDataFields(fieldDataStrings);
+            rdlcExpression.Fields = MakeDataFields(fieldDataStrings, tablixDatasetName);
             rdlcExpression.SpacialAttributes = CheckSpecialAttributes(rdlcExpressionText);
             return rdlcExpression;
         }
 
-        List<RdlcDataField> MakeDataFields(IEnumerable<string> dataFieldStrings)
+        List<RdlcDataField> MakeDataFields(IEnumerable<string> dataFieldStrings, string tablixDatasetName)
         {
             var dataFields = new List<RdlcDataField>();
             foreach (string fieldString in dataFieldStrings)
@@ -62,7 +62,7 @@ namespace RdlcReportLabeler
                     dataFields.Add(new RdlcDataField
                     {
                         Field = field,
-                        Dataset = "",
+                        Dataset = tablixDatasetName,
                     });
                 }
             }
@@ -90,13 +90,6 @@ namespace RdlcReportLabeler
                 }
             }
 
-            if (expressionLowerCase.Contains("lookuptable"))
-            {
-                if (!attributes.Exists(a => a == SpacialAttribute.Lookup))
-                {
-                    attributes.Add(SpacialAttribute.Lookup);
-                }
-            }
             return attributes;
         }
     }
