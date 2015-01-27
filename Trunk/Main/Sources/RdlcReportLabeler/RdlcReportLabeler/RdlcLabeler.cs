@@ -49,6 +49,9 @@ namespace RdlcReportLabeler
             }
             if (tablixes == null || tablixes.Count == 0) { throw new ApplicationException("No Tablix elemment found!"); }
 
+            XmlNode n = tablixes[0];
+            n.ParentNode.RemoveChild(n);
+
             foreach (XmlNode tablixNode in tablixes)
             {
                 XmlElement dataSetNameElement = tablixNode["DataSetName"];
