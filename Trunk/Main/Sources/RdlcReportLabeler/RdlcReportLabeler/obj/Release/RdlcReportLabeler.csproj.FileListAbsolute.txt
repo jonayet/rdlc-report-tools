@@ -20,6 +20,7 @@ F:\Projects\Tools\rdlc-report-tools\Trunk\Main\Sources\RdlcReportLabeler\RdlcRep
 F:\Projects\Tools\rdlc-report-tools\Trunk\Main\Sources\RdlcReportLabeler\RdlcReportLabeler\obj\Release\RdlcReportLabeler.RdlcReportOutputUi.resources
 F:\Projects\Tools\rdlc-report-tools\Trunk\Main\Sources\RdlcReportLabeler\RdlcReportLabeler\obj\Release\RdlcReportLabeler.RdlcReportLabelerUi.resources
 F:\Projects\Tools\rdlc-report-tools\Trunk\Main\Sources\RdlcReportLabeler\RdlcReportLabeler\obj\Release\RdlcReportLabeler.Properties.Resources.resources
+F:\Projects\Tools\rdlc-report-tools\Trunk\Main\Sources\RdlcReportLabeler\RdlcReportLabeler\obj\Release\RdlcReportLabeler.SettingsUiForm.resources
 F:\Projects\Tools\rdlc-report-tools\Trunk\Main\Sources\RdlcReportLabeler\RdlcReportLabeler\obj\Release\RdlcReportLabeler.csproj.GenerateResource.Cache
 F:\Projects\Tools\rdlc-report-tools\Trunk\Main\Sources\RdlcReportLabeler\RdlcReportLabeler\obj\Release\RdlcReportLabeler.exe
 F:\Projects\Tools\rdlc-report-tools\Trunk\Main\Sources\RdlcReportLabeler\RdlcReportLabeler\obj\Release\RdlcReportLabeler.pdb

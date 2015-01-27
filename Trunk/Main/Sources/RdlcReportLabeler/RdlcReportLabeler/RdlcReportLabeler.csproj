@@ -61,6 +61,7 @@
       <HintPath>Libs\ScintillaNET.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
     <Reference Include="System.Xml.Linq" />
@@ -73,6 +74,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PortableSettingsProvider.cs" />
     <Compile Include="RdlcDataField.cs" />
     <Compile Include="RdlcExpressionParser.cs" />
     <Compile Include="RdlcLabeler.cs" />
@@ -90,6 +92,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SettingsUiForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SettingsUiForm.Designer.cs">
+      <DependentUpon>SettingsUiForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="RdlcReportOutputUi.resx">
       <DependentUpon>RdlcReportOutputUi.cs</DependentUpon>
     </EmbeddedResource>
@@ -106,6 +114,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="SettingsUiForm.resx">
+      <DependentUpon>SettingsUiForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="app.config" />
     <None Include="Properties\DataSources\DymmyDataSet.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -116,9 +128,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="1422285452_111048.ico" />

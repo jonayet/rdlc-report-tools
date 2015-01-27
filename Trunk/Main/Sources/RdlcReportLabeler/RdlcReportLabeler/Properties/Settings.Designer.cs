@@ -22,5 +22,17 @@ namespace RdlcReportLabeler.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public decimal FieldLength {
+            get {
+                return ((decimal)(this["FieldLength"]));
+            }
+            set {
+                this["FieldLength"] = value;
+            }
+        }
     }
 }

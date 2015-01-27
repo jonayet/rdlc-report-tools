@@ -12,8 +12,13 @@ namespace RdlcReportLabeler
         private const string XmlNamespace1 = "http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition";
         private const string XmlNamespace2 = "http://schemas.microsoft.com/sqlserver/reporting/2010/01/reportdefinition";
         private const int MaxFieldsToConcate = 3;
-        private const int MaxFieldLength = 10;
+        private readonly int _maxFieldLength = 10;
         private string _xmlNamespace = "";
+
+        public RdlcLabeler()
+        {
+            _maxFieldLength = (int) Properties.Settings.Default.FieldLength;
+        }
 
         public string GetLabledRdlcReport(XmlDocument xmlDoc)
         {
@@ -109,9 +114,9 @@ namespace RdlcReportLabeler
                 if (i != 0 ) { labelText += "_"; }
 
                 // shorten length
-                if (fieldText.Length > MaxFieldLength)
+                if (_maxFieldLength > 0 && fieldText.Length > _maxFieldLength)
                 {
-                    fieldText = fieldText.Substring(0, MaxFieldLength);
+                    fieldText = fieldText.Substring(0, _maxFieldLength);
                 }
 
                 if (hasLookup)

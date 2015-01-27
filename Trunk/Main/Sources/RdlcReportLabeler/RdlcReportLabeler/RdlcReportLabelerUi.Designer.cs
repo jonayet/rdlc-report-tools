@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RdlcReportLabelerUi));
             this.doLabelingButton = new System.Windows.Forms.Button();
             this.rdlcXmlInputScintilla = new ScintillaNET.Scintilla();
+            this.settingsButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.rdlcXmlInputScintilla)).BeginInit();
             this.SuspendLayout();
             // 
@@ -66,11 +67,22 @@
             this.rdlcXmlInputScintilla.Styles.Max.FontName = "Verdana\0\0\0\0\0\0\0\0\0\0\0\0\0";
             this.rdlcXmlInputScintilla.TabIndex = 2;
             // 
+            // settingsButton
+            // 
+            this.settingsButton.Location = new System.Drawing.Point(705, 12);
+            this.settingsButton.Name = "settingsButton";
+            this.settingsButton.Size = new System.Drawing.Size(75, 23);
+            this.settingsButton.TabIndex = 3;
+            this.settingsButton.Text = "Settings";
+            this.settingsButton.UseVisualStyleBackColor = true;
+            this.settingsButton.Click += new System.EventHandler(this.settingsButton_Click);
+            // 
             // RdlcReportLabelerUi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(830, 704);
+            this.Controls.Add(this.settingsButton);
             this.Controls.Add(this.doLabelingButton);
             this.Controls.Add(this.rdlcXmlInputScintilla);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -85,6 +97,7 @@
 
         private System.Windows.Forms.Button doLabelingButton;
         private ScintillaNET.Scintilla rdlcXmlInputScintilla;
+        private System.Windows.Forms.Button settingsButton;
     }
 }
 

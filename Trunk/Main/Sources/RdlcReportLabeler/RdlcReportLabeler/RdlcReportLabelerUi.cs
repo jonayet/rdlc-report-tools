@@ -51,5 +51,10 @@ namespace RdlcReportLabeler
             var reportOutput = new RdlcReportOutputUi(labeledRdlcXml);
             reportOutput.ShowDialog();
         }
+
+        private void settingsButton_Click(object sender, EventArgs e)
+        {
+            new SettingsUiForm().ShowDialog();
+        }
     }
 }
