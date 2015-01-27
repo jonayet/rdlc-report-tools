@@ -11,6 +11,15 @@ F:\Projects\Tools\Swisslife\RdlcReportLabeler\RdlcReportLabeler\obj\Release\Rdlc
 F:\Projects\Tools\Swisslife\RdlcReportLabeler\RdlcReportLabeler\obj\Release\RdlcReportLabeler.csproj.GenerateResource.Cache
 F:\Projects\Tools\Swisslife\RdlcReportLabeler\RdlcReportLabeler\obj\Release\RdlcReportLabeler.exe
 F:\Projects\Tools\Swisslife\RdlcReportLabeler\RdlcReportLabeler\obj\Release\RdlcReportLabeler.pdb
+F:\Projects\Tools\rdlc-report-tools\Trunk\Main\Sources\RdlcReportLabeler\RdlcReportLabeler\bin\Release\SciLexer.dll
+F:\Projects\Tools\rdlc-report-tools\Trunk\Main\Sources\RdlcReportLabeler\RdlcReportLabeler\bin\Release\SciLexer64.dll
+F:\Projects\Tools\rdlc-report-tools\Trunk\Main\Sources\RdlcReportLabeler\RdlcReportLabeler\bin\Release\ScintillaNET.dll
 F:\Projects\Tools\rdlc-report-tools\Trunk\Main\Sources\RdlcReportLabeler\RdlcReportLabeler\bin\Release\RdlcReportLabeler.exe.config
+F:\Projects\Tools\rdlc-report-tools\Trunk\Main\Sources\RdlcReportLabeler\RdlcReportLabeler\bin\Release\RdlcReportLabeler.exe
+F:\Projects\Tools\rdlc-report-tools\Trunk\Main\Sources\RdlcReportLabeler\RdlcReportLabeler\bin\Release\RdlcReportLabeler.pdb
+F:\Projects\Tools\rdlc-report-tools\Trunk\Main\Sources\RdlcReportLabeler\RdlcReportLabeler\obj\Release\RdlcReportLabeler.RdlcReportOutputUi.resources
+F:\Projects\Tools\rdlc-report-tools\Trunk\Main\Sources\RdlcReportLabeler\RdlcReportLabeler\obj\Release\RdlcReportLabeler.RdlcReportLabelerUi.resources
+F:\Projects\Tools\rdlc-report-tools\Trunk\Main\Sources\RdlcReportLabeler\RdlcReportLabeler\obj\Release\RdlcReportLabeler.Properties.Resources.resources
+F:\Projects\Tools\rdlc-report-tools\Trunk\Main\Sources\RdlcReportLabeler\RdlcReportLabeler\obj\Release\RdlcReportLabeler.csproj.GenerateResource.Cache
 F:\Projects\Tools\rdlc-report-tools\Trunk\Main\Sources\RdlcReportLabeler\RdlcReportLabeler\obj\Release\RdlcReportLabeler.exe
 F:\Projects\Tools\rdlc-report-tools\Trunk\Main\Sources\RdlcReportLabeler\RdlcReportLabeler\obj\Release\RdlcReportLabeler.pdb
