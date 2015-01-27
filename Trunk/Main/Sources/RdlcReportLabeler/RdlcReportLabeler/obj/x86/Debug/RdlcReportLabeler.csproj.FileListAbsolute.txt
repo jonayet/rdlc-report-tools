@@ -1,0 +1,11 @@
+F:\Projects\Tools\Swisslife\RdlcReportLabeler\RdlcReportLabeler\bin\x86\Debug\RdlcReportLabeler.exe.config
+F:\Projects\Tools\Swisslife\RdlcReportLabeler\RdlcReportLabeler\bin\x86\Debug\XmlFile.xml
+F:\Projects\Tools\Swisslife\RdlcReportLabeler\RdlcReportLabeler\bin\x86\Debug\RdlcReportLabeler.exe
+F:\Projects\Tools\Swisslife\RdlcReportLabeler\RdlcReportLabeler\bin\x86\Debug\RdlcReportLabeler.pdb
+F:\Projects\Tools\Swisslife\RdlcReportLabeler\RdlcReportLabeler\bin\x86\Debug\ScintillaNET.dll
+F:\Projects\Tools\Swisslife\RdlcReportLabeler\RdlcReportLabeler\obj\x86\Debug\RdlcReportLabeler.RdlcReportOutputUi.resources
+F:\Projects\Tools\Swisslife\RdlcReportLabeler\RdlcReportLabeler\obj\x86\Debug\RdlcReportLabeler.RdlcReportLabelerUi.resources
+F:\Projects\Tools\Swisslife\RdlcReportLabeler\RdlcReportLabeler\obj\x86\Debug\RdlcReportLabeler.Properties.Resources.resources
+F:\Projects\Tools\Swisslife\RdlcReportLabeler\RdlcReportLabeler\obj\x86\Debug\RdlcReportLabeler.csproj.GenerateResource.Cache
+F:\Projects\Tools\Swisslife\RdlcReportLabeler\RdlcReportLabeler\obj\x86\Debug\RdlcReportLabeler.exe
+F:\Projects\Tools\Swisslife\RdlcReportLabeler\RdlcReportLabeler\obj\x86\Debug\RdlcReportLabeler.pdb
