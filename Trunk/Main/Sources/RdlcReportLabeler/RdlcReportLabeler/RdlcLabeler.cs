@@ -49,9 +49,6 @@ namespace RdlcReportLabeler
             }
             if (tablixes == null || tablixes.Count == 0) { throw new ApplicationException("No Tablix elemment found!"); }
 
-            XmlNode n = tablixes[0];
-            n.ParentNode.RemoveChild(n);
-
             foreach (XmlNode tablixNode in tablixes)
             {
                 XmlElement dataSetNameElement = tablixNode["DataSetName"];
@@ -63,35 +60,32 @@ namespace RdlcReportLabeler
 
                 foreach (XmlNode xmlNode in textRuns)
                 {
-                    if (xmlNode.HasChildNodes)
-                    {
-                        XmlElement valueElement = xmlNode["Value"];
-                        if (valueElement != null)
-                        {
-                            string expression = valueElement.InnerText;
-                            if (!string.IsNullOrEmpty(expression))
-                            {
-                                RdlcExpression aRdlcExpression = new RdlcExpressionParser().GetParsedRdlcExpression(expression, tablixDatasetName);
-                                if (aRdlcExpression.Fields.Count > 0)
-                                {
-                                    var labelElement = xmlNode["Label"];
-                                    if (labelElement == null)
-                                    {
-                                        var labelText = BuildLabelText(aRdlcExpression);
-                                        if (!string.IsNullOrWhiteSpace(labelText))
-                                        {
-                                            labelElement = xmlDoc.CreateElement("Label", _xmlNamespace);
-                                            labelElement.InnerText = labelText;
-                                            xmlNode.InsertBefore(labelElement, valueElement);
-                                        }
-                                    }
-                                    else
-                                    {
+                    if (!xmlNode.HasChildNodes) { continue; }
 
-                                    }
-                                }
-                            }
-                        }
+                    var valueElement = xmlNode["Value"];
+                    if (valueElement == null) { continue; }
+
+                    var expression = valueElement.InnerText;
+                    if (string.IsNullOrEmpty(expression)) { continue; }
+
+                    var aRdlcExpression = new RdlcExpressionParser().GetParsedRdlcExpression(expression, tablixDatasetName);
+                    if (aRdlcExpression.Fields.Count <= 0) { continue; }
+
+                    var labelText = BuildLabelText(aRdlcExpression);
+                    if (string.IsNullOrWhiteSpace(labelText)) { continue; }
+
+                    var labelElement = xmlNode["Label"];
+                    if (labelElement == null)
+                    {
+                        labelElement = xmlDoc.CreateElement("Label", _xmlNamespace);
+                        labelElement.InnerText = labelText;
+                        xmlNode.InsertBefore(labelElement, valueElement);
+                    }
+                    else
+                    {
+                        if (!Settings.Default.OverwriteOldLabel) { continue; }
+                        labelElement.InnerText = labelText;
+                        xmlNode.InsertBefore(labelElement, valueElement);
                     }
                 }
             }

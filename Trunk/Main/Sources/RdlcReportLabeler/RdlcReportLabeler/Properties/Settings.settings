@@ -6,7 +6,10 @@
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="MaxFieldsToConcate" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">5</Value>
+      <Value Profile="(Default)">3</Value>
+    </Setting>
+    <Setting Name="OverwriteOldLabel" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
 </SettingsFile>

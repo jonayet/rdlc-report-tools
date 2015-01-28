@@ -1,22 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
-using System.Xml.Linq;
+using RdlcReportLabeler.Properties;
 
 namespace RdlcReportLabeler
 {
     public partial class RdlcReportLabelerUi : Form
     {
-        
-
         public RdlcReportLabelerUi()
         {
             InitializeComponent();
@@ -24,22 +14,25 @@ namespace RdlcReportLabeler
 
         private void doLabelingButton_Click(object sender, EventArgs e)
         {
+            var rdlcXmlString = rdlcXmlInputScintilla.Text;
+
             // load RDLC XML
             var xmlDoc = new XmlDocument();
             try
             {
-                xmlDoc.LoadXml(rdlcXmlInputScintilla.Text);
+                xmlDoc.LoadXml(rdlcXmlString);
             }
             catch (XmlException)
             {
-                MessageBox.Show("Error in XML!");
+                MessageBox.Show(@"Error in XML!");
                 return;
             }
 
-            string labeledRdlcXml = "";
+            // get labled!
+            string labeledRdlcXmlString;
             try
             {
-                labeledRdlcXml = new RdlcLabeler().GetLabledRdlcReport(xmlDoc);
+                labeledRdlcXmlString = new RdlcLabeler().GetLabledRdlcReport(xmlDoc);
                 
             }
             catch (ApplicationException ae)
@@ -48,7 +41,7 @@ namespace RdlcReportLabeler
                 return;
             }
 
-            var reportOutput = new RdlcReportOutputUi(labeledRdlcXml);
+            var reportOutput = new RdlcReportOutputUi(labeledRdlcXmlString);
             reportOutput.ShowDialog();
         }
 

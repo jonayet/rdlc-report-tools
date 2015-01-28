@@ -24,4 +24,3 @@ F:\Projects\Tools\rdlc-report-tools\Trunk\Main\Sources\RdlcReportLabeler\RdlcRep
 F:\Projects\Tools\rdlc-report-tools\Trunk\Main\Sources\RdlcReportLabeler\RdlcReportLabeler\obj\Release\RdlcReportLabeler.csproj.GenerateResource.Cache
 F:\Projects\Tools\rdlc-report-tools\Trunk\Main\Sources\RdlcReportLabeler\RdlcReportLabeler\obj\Release\RdlcReportLabeler.exe
 F:\Projects\Tools\rdlc-report-tools\Trunk\Main\Sources\RdlcReportLabeler\RdlcReportLabeler\obj\Release\RdlcReportLabeler.pdb
-F:\Projects\Tools\rdlc-report-tools\Trunk\Main\Sources\RdlcReportLabeler\RdlcReportLabeler\obj\Release\RdlcReportLabeler.csprojResolveAssemblyReference.cache

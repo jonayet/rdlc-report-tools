@@ -32,6 +32,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.saveButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.overwriteOldLabelCheckBox = new System.Windows.Forms.CheckBox();
             this.maxFieldsToConcateNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.fieldLengthNumericUpDown = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.maxFieldsToConcateNumericUpDown)).BeginInit();
@@ -42,7 +43,7 @@
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(57, 15);
+            this.label1.Location = new System.Drawing.Point(65, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(68, 13);
             this.label1.TabIndex = 0;
@@ -50,7 +51,7 @@
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(201, 217);
+            this.saveButton.Location = new System.Drawing.Point(201, 218);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(71, 32);
             this.saveButton.TabIndex = 2;
@@ -62,11 +63,26 @@
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(7, 41);
+            this.label2.Location = new System.Drawing.Point(15, 41);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(118, 13);
             this.label2.TabIndex = 4;
             this.label2.Text = "Max. Fields to Concate:";
+            // 
+            // overwriteOldLabelCheckBox
+            // 
+            this.overwriteOldLabelCheckBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.overwriteOldLabelCheckBox.AutoSize = true;
+            this.overwriteOldLabelCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.overwriteOldLabelCheckBox.Checked = global::RdlcReportLabeler.Properties.Settings.Default.OverwriteOldLabel;
+            this.overwriteOldLabelCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.overwriteOldLabelCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::RdlcReportLabeler.Properties.Settings.Default, "OverwriteOldLabel", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.overwriteOldLabelCheckBox.Location = new System.Drawing.Point(34, 65);
+            this.overwriteOldLabelCheckBox.Name = "overwriteOldLabelCheckBox";
+            this.overwriteOldLabelCheckBox.Size = new System.Drawing.Size(119, 17);
+            this.overwriteOldLabelCheckBox.TabIndex = 6;
+            this.overwriteOldLabelCheckBox.Text = "Overwrite old label: ";
+            this.overwriteOldLabelCheckBox.UseVisualStyleBackColor = true;
             // 
             // maxFieldsToConcateNumericUpDown
             // 
@@ -98,6 +114,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Controls.Add(this.overwriteOldLabelCheckBox);
             this.Controls.Add(this.maxFieldsToConcateNumericUpDown);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.fieldLengthNumericUpDown);
@@ -124,5 +141,6 @@
         private System.Windows.Forms.NumericUpDown fieldLengthNumericUpDown;
         private System.Windows.Forms.NumericUpDown maxFieldsToConcateNumericUpDown;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.CheckBox overwriteOldLabelCheckBox;
     }
 }
