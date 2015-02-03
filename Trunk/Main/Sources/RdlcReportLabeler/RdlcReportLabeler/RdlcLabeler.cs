@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Xml;
+using System.Xml.Linq;
+using System.Xml.XPath;
 using RdlcReportLabeler.Properties;
 
 namespace RdlcReportLabeler
@@ -15,7 +17,7 @@ namespace RdlcReportLabeler
         private readonly string[] _xmlNamespaces = {"http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition", "http://schemas.microsoft.com/sqlserver/reporting/2010/01/reportdefinition"};
         private readonly string[] _nsPrefixes = { "ns1", "ns2" };
         private readonly int _maxFieldsToConcate = 3;
-        private readonly int _maxFieldLength;
+        private int _maxFieldLength;
         private string _xmlNamespace = "";
         private string _xmlPrefix = "";
 
@@ -34,35 +36,32 @@ namespace RdlcReportLabeler
             xmlnsManager.AddNamespace(_nsPrefixes[1], _xmlNamespaces[1]);
 
             // pre-check for "TextRun" element
-            if (xmlDoc.DocumentElement == null)
-            {
-                throw new ApplicationException("Empty XML doc!");
-            }
-
+            if (xmlDoc.DocumentElement == null) { throw new ApplicationException("Empty XML doc!"); }
             XmlNodeList tablixes = null;
             for (var i = 0; i < _xmlNamespaces.Length; i++)
             {
                 _xmlPrefix = _nsPrefixes[i];
                 _xmlNamespace = _xmlNamespaces[i];
-                tablixes = xmlDoc.DocumentElement.SelectNodes("//" + _xmlPrefix + ":" + "Tablix", xmlnsManager);
+                tablixes = xmlDoc.DocumentElement.SelectNodes(".//" + _xmlPrefix + ":" + "Tablix", xmlnsManager);
                 if (tablixes != null && tablixes.Count > 0) { break; }
             }
             if (tablixes == null || tablixes.Count == 0) { throw new ApplicationException("No Tablix elemment found!"); }
 
+            // iterate through nested element
             foreach (XmlNode tablixNode in tablixes)
             {
-                XmlElement dataSetNameElement = tablixNode["DataSetName"];
+                var dataSetNameElement = tablixNode["DataSetName"];
                 var tablixDatasetName = "";
                 if (dataSetNameElement != null) { tablixDatasetName = dataSetNameElement.InnerText; }
 
-                var textRuns = tablixNode.SelectNodes("//" + _xmlPrefix + ":" + "TextRun", xmlnsManager);
+                var textRuns = tablixNode.SelectNodes(".//" + _xmlPrefix + ":" + "TextRun", xmlnsManager);
                 if (textRuns == null) { continue; }
 
-                foreach (XmlNode xmlNode in textRuns)
+                foreach (XmlNode textRunNode in textRuns)
                 {
-                    if (!xmlNode.HasChildNodes) { continue; }
+                    if (!tablixNode.HasChildNodes) { continue; }
 
-                    var valueElement = xmlNode["Value"];
+                    var valueElement = textRunNode["Value"];
                     if (valueElement == null) { continue; }
 
                     var expression = valueElement.InnerText;
@@ -74,18 +73,17 @@ namespace RdlcReportLabeler
                     var labelText = BuildLabelText(aRdlcExpression);
                     if (string.IsNullOrWhiteSpace(labelText)) { continue; }
 
-                    var labelElement = xmlNode["Label"];
+                    var labelElement = textRunNode["Label"];
                     if (labelElement == null)
                     {
                         labelElement = xmlDoc.CreateElement("Label", _xmlNamespace);
                         labelElement.InnerText = labelText;
-                        xmlNode.InsertBefore(labelElement, valueElement);
+                        textRunNode.InsertBefore(labelElement, valueElement);
                     }
                     else
                     {
                         if (!Settings.Default.OverwriteOldLabel) { continue; }
                         labelElement.InnerText = labelText;
-                        xmlNode.InsertBefore(labelElement, valueElement);
                     }
                 }
             }
